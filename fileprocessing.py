@@ -2,13 +2,14 @@
 import csv
 import json
 from pathlib import Path
+import os
 
-home = 'C:/Users/tk4az/OneDrive/qna/program/'
+home = Path(__file__).parents[0]
 
 def read_csv(filename):
     list_file = []
     
-    with open(Path(home+filename), 'r', encoding="utf-8-sig") as f:
+    with open(home / filename, 'r', encoding="utf-8-sig") as f:
         reader = csv.reader(f, delimiter=';')
         list_file = list(reader)
     
@@ -19,7 +20,7 @@ def write_csv(filename, list_file):
     
     while True:
         try:
-            output = open(Path(home+filename), 'w', newline='', encoding='utf-8-sig')
+            output = open(home / filename, 'w', newline='', encoding='utf-8-sig')
             break
         except PermissionError:
             input("Please close the file: " + filename + " and click enter!")
@@ -35,12 +36,12 @@ def write_csv(filename, list_file):
 #write configuration information
 def read_json():
     
-    with open(Path(home+'config.json')) as json_data_file:
+    with open(home / 'config.json') as json_data_file:
         data = json.load(json_data_file)
     
     return data
 
-def write_json(data, h=home):
+def write_json(data):
     
-    with open(Path(home+'config.json'), 'w') as outfile:
+    with open(home / 'config.json', 'w') as outfile:
         json.dump(data, outfile)

@@ -2,6 +2,8 @@ This script aims to support humans in filling due diligence survey. For each que
 
 The script uses console user input to trigger functionalities like changing the question manually or looking for the right answer using keywords. The script relies on CSV file which need to be deployed in the same folder as the script.
 
+Please note that the script has been developed for Windows and has not been tested on other platforms.
+
 ## Modules
 * main.py - the core module
 * cosine.py - where comparison is processed using NLP paradigms
@@ -27,12 +29,12 @@ Those are mandatory files
 ## Workflow
 Note that the output is systematically updated and can be used out of the shell once produced - in case the script should be killed the output is never lost. The script can be started again without lost.
 
-(1) Start the script using python3 ".\main.py"
-(2) Choose if you want to run the script for all questions or improve the questions manually (or both)
-(3) If you choose to improve the result
-    (3.1) Enter the threshold (minimal success ratio) - all questions under the threashold will be selected
-    (3.2) Identify the question you want to work on using an ID
-    (3.3) Choose the option a, b or c (see above)
-        (3.3.a) 5 Alternatives are identified, you can select the best match using an ID
-        (3.3.b) Enter a question manually - 5 alternatives are identified - you can select the best match using an ID 
-        (3.3.c) You can use keywords to look for answers - keywords are cumulative which means questions must contain all keywords - you can restart the process at any time - you can enter more than one keyword at a time using a ','
+(1) Start the script using python3 ".\main.py"  
+(2) Choose if you want to run the script for all questions or improve the questions manually (or both)  
+(3) If you choose to improve the result  
+    (3.1) Enter the threshold (minimal success ratio) - all questions under the threashold will be selected  
+    (3.2) Identify the question you want to work on using an ID  
+    (3.3) Choose the option a, b or c (see above)  
+        (3.3.a) 5 Alternatives are identified, you can select the best match using an ID  
+        (3.3.b) Enter a question manually - 5 alternatives are identified - you can select the best match using an ID   
+        (3.3.c) You can use keywords to look for answers - keywords are cumulative which means questions must contain all keywords - you can restart the process at any time - you can enter more than one keyword at a time using a ','  
