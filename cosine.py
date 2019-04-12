@@ -7,13 +7,18 @@ from collections import deque
 
 class Cosine():
     
-    def __init__(self, db):
+    def __init__(self, db, model='jaccard'):
         
         #https://fasttext.cc/
         #model_bis_path = Path("C:/Users/tk4az/OneDrive/qna/program/model/wiki_news") 
         #self.nlp = spacy.load(model_bis_path)
-        #self.nlp = spacy.load('en_core_web_lg') #including vector
-        self.nlp = spacy.load('en_core_web_sm') #small only for pos
+        
+        self.model = model
+        
+        if self.model=='cosine':
+            self.nlp = spacy.load('en_core_web_lg') #including vector
+        else:
+            self.nlp = spacy.load('en_core_web_sm') #small only for pos
         
         self.db = db
         self.doc_l = [self.nlp(x[0]) for x in db]
@@ -32,11 +37,11 @@ class Cosine():
     
     #keep only noun in the sentece - tests were unsuccessfull removing elements from the
     #sentence
-    def remove_tokens_on_match(self):
+    def remove_tokens_on_match(self, doc):
         indexes = []
-        for index, token in enumerate(doc):
-            if not token.is_stop and token.pos_ == "NOUN":
-                indexes.append(index)
+        for inx, token in enumerate(doc):
+            if not token.is_stop and token.tag_ == "NN":
+                indexes.append(inx)
         
         np_array = doc.to_array([LOWER, POS, ENT_TYPE, IS_ALPHA])
         np_array = numpy.delete(np_array, indexes, axis = 0)
@@ -50,10 +55,12 @@ class Cosine():
         
         #[[r,q,a],[r,q,a]]
         output = deque(top_x*[[0,'','']], top_x) #get the top <x> items
-        sen1 = self.nlp(sen1)
+        
+        sen1 = self.remove_tokens_on_match(self.nlp(sen1)) if self.model == 'cosine' else self.nlp(sen1)
         
         for inx, x in enumerate(self.doc_l):
-            ratio = self.jaccard(sen1, x)
+            ratio = self.remove_tokens_on_match(sen1).similarity(self.remove_tokens_on_match(x)) if self.model == 'cosine' \
+                else self.jaccard(sen1, x)
 
             if ratio > output[0][0]:
                 output.appendleft([ratio]+[x.text]+[self.db[inx][1]])

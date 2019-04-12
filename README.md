@@ -29,16 +29,18 @@ Those are mandatory files and must be encoded in UTF8 (in case you are on window
 ## Workflow
 Note that the output is systematically updated and can be used out of the shell once produced - in case the script should be killed the output is never lost. The script can be started again without lost.
 
-(1) Start the script using python3 ".\main.py"  
-(2) Choose if you want to run the script for all questions or improve the questions manually (or both)  
-(3) If you choose to improve the result  
-    (3.1) Enter the threshold (minimal success ratio) - all questions under the threashold will be selected  
-    (3.2) Identify the question you want to work on using an ID  
-    (3.3) Choose the option a, b or c (see above)  
-        (3.3.a) 5 Alternatives are identified, you can select the best match using an ID  
-        (3.3.b) Enter a question manually - 5 alternatives are identified - you can select the best match using an ID   
-        (3.3.c) You can use keywords to look for answers - keywords are cumulative which means questions must contain all keywords - you can restart the process at any time - you can enter more than one keyword at a time using a ','  
+* Start the script using python3 ".\main.py"  
+* Choose the comparison model you want to use (see change 002 below) - for specific textual information or in case the English is poor, we recommend using (1)  
+* Choose if you want to run the script for all questions or improve the questions manually (or both)  
+* If you choose to improve the result  
+** Enter the threshold (minimal success ratio) - all questions under the threashold will be selected  
+** Identify the question you want to work on using an ID  
+** Choose the option a, b or c (see above)  
+*** 5 Alternatives are identified, you can select the best match using an ID  
+*** Enter a question manually - 5 alternatives are identified - you can select the best match using an ID   
+*** You can use keywords to look for answers - keywords are cumulative which means questions must contain all keywords - you can restart the process at any time - you can enter more than one keyword at a time using a ','  
         
 ## Changes
 
-* file names for "questions", "db" and "output" can be set in the configuration file
+* (002) add the possibility to choose between a dummy comparison of keywords (Jaccard) and true similarity using the similarity function of Spacy on keywords based on the model 'en_core_web_lg'
+* (001) file names for "questions", "db" and "output" can be set in the configuration file

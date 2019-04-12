@@ -119,11 +119,11 @@ def search_keyWords(origin='extended'):
                 input_list = [x[1] for x in list_db]
 
 
-def initial_run():
+def initial_run(model='jaccard'):
     
     global cosine_ob
     
-    cosine_ob = cosine.Cosine(list_db) 
+    cosine_ob = cosine.Cosine(list_db, model) 
     output_list = [] #[[q_id, q, ratio, db.q, db.a]] - focus only on the best ratio
     
     try:
@@ -275,12 +275,22 @@ except Exception as e:
 
 #Can be commented depending on what we want to do
 
+h_p_console(1,"Welcome")
+
+with_model = input("Do you want to:\n[1] - Use Jaccard on keywords \n[2] - Use true similarity on keywords \n>> ")
+if with_model == '1':
+    model = 'jaccard'
+else:
+    model = 'cosine'
+
+h_p_console(3, 'The script will run using: ' + model)
+    
 try:
-    h_p_console(1,"Welcome")
+    
     to_do = input("Do you want to:\n[1] - Run the script to find the best options \n[2] - Refine the result  \n[3] - Both sequentially \n[4] - Search responses with keywords\n>> ")
     if to_do == '1':
         print("... Please be patient - it might take a while", end='\n\n')
-        initial_run()
+        initial_run(model)
         print("... Completed the script is closing")
     elif to_do == '2':
         work_on_result()
@@ -288,7 +298,7 @@ try:
         search_keyWords('standalone')
     else:
         print("... Please be patient - it might take a while", end='\n\n')
-        initial_run()
+        initial_run(model)
         work_on_result()
 
 except KeyboardInterrupt:
