@@ -10,7 +10,7 @@ Please note that the script has been developed for Windows and has not been test
 * fileprocessing.py - manage IO
 
 ## Files
-Those are mandatory files
+Those are mandatory files and must be encoded in UTF8 (in case you are on windows)
 * config.json - where key variables are stored - the idea is to make the script improvable, e.g. by adding new stopwords
 * db.csv - ['question','answer'] - the DB with all existing questions and answers
 * questions.csv - ['question'] - the survey containing all questions
@@ -38,3 +38,7 @@ Note that the output is systematically updated and can be used out of the shell 
         (3.3.a) 5 Alternatives are identified, you can select the best match using an ID  
         (3.3.b) Enter a question manually - 5 alternatives are identified - you can select the best match using an ID   
         (3.3.c) You can use keywords to look for answers - keywords are cumulative which means questions must contain all keywords - you can restart the process at any time - you can enter more than one keyword at a time using a ','  
+        
+## Changes
+
+* file names for "questions", "db" and "output" can be set in the configuration file

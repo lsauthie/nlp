@@ -1,1 +1,1 @@
-{"default": {"nb_responses_displayed": "5", "home": "C:/Users/tk4az/OneDrive/qna/program/"}, "other": {"stopwords_q": ["supplier"], "stopwords_a": [""]}}
+{"default": {"nb_responses_displayed": "5", "db_name": "db.csv", "questions_name": "questions.csv", "output_name": "output.csv"}, "other": {"stopwords_q": ["supplier"], "stopwords_a": [""]}}

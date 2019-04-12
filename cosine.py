@@ -1,5 +1,3 @@
-#http://techinpink.com/2017/08/04/implementing-similarity-measures-cosine-similarity-versus-jaccard-similarity/
-#python64.lnk C:\Users\tk4az\OneDrive\qna\program\cosine.py
 import spacy
 from spacy.attrs import LOWER, POS, ENT_TYPE, IS_ALPHA
 from spacy.tokens import Doc

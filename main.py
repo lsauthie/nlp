@@ -1,4 +1,3 @@
-#cd OneDrive\qna\program
 import cosine
 import fileprocessing
 import re
@@ -8,7 +7,6 @@ from colorama import Fore, Style
 colorama.init()
 
 cfg_data = fileprocessing.read_json() #get config data
-home = cfg_data['default']['home']
 list_q = []
 list_db = []
 
@@ -129,7 +127,7 @@ def initial_run():
     output_list = [] #[[q_id, q, ratio, db.q, db.a]] - focus only on the best ratio
     
     try:
-        list_q = fileprocessing.read_csv('questions.csv')
+        list_q = fileprocessing.read_csv(cfg_data['default']['questions_name'])
     except:
         h_p_console(2, "The file with questions does not exist - please refer to documentation")
         sys_exit()
@@ -142,7 +140,7 @@ def initial_run():
         output_list.append([q_id]+[question]+best_fit[0]) #only the best ratio - this part should be adapted if we want all result
         q_id += 1 #to define the id of the question
             
-    fileprocessing.write_csv('output.csv',output_list)
+    fileprocessing.write_csv(cfg_data['default']['output_name'],output_list)
 
 #used to pass a question
 def manual_run(question):
@@ -166,7 +164,7 @@ def manual_run(question):
     
 def work_on_result():
     
-    load_output = fileprocessing.read_csv('output.csv') #[[q_id, q, ratio, db.q, db.a]]
+    load_output = fileprocessing.read_csv(cfg_data['default']['output_name']) #[[q_id, q, ratio, db.q, db.a]]
 
     #compute ratio distribution
     list_r = []
@@ -230,7 +228,7 @@ def work_on_result():
                     oa[3] = new_search[input_res][1]
                     oa[4] = new_search[input_res][2]
 
-                    fileprocessing.write_csv('output.csv',load_output) #save a copy
+                    fileprocessing.write_csv(cfg_data['default']['output_name'],load_output) #save a copy
                     break #exit the while
 
             elif choice == '1':
@@ -250,7 +248,7 @@ def work_on_result():
                     oa[3] = new_search[input_res][1]
                     oa[4] = new_search[input_res][2]
 
-                    fileprocessing.write_csv('output.csv',load_output) #save a copy
+                    fileprocessing.write_csv(cfg_data['default']['output_name'],load_output) #save a copy
                     break #exit the while
 
             elif choice == '2':
@@ -264,15 +262,15 @@ def work_on_result():
                     oa[3] = oa[1] #in this case we don't consider the db.q as we are looking directly for the response, furthermore the db as more than one question for a same answer
                     oa[4] = response
 
-                    fileprocessing.write_csv('output.csv',load_output) #save a copy
+                    fileprocessing.write_csv(cfg_data['default']['output_name'],load_output) #save a copy
                     break
             else:
                 break
 
 try:
-    list_db = fileprocessing.read_csv('db.csv')
-except:
-    h_p_console(2, "The file with DB does not exist - please refer to documentation")
+    list_db = fileprocessing.read_csv(cfg_data['default']['db_name'])
+except Exception as e:
+    h_p_console(2, str(e))
     sys_exit()
 
 #Can be commented depending on what we want to do
