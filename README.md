@@ -1,3 +1,5 @@
+To understand the story behind this script - [read my story on Medium](https://medium.com/@ludovicsauthier/natural-language-processing-nlp-for-dummies-feedback-from-the-field-9aa937ca088a?source=friends_link&sk=a064464ccfdd5aed76ea4962c7880d76)
+
 This script aims to support humans in filling due diligence survey. For each question from the survey, it looks for the best corresponding question in a DB. It leverages basic NLP paradigms like "lemming" and "tokenization". 
 
 The script uses console user input to trigger functionalities like changing the question manually or looking for the right answer using keywords. The script relies on CSV file which need to be deployed in the same folder as the script.
